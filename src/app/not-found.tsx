@@ -1,5 +1,5 @@
 import Link from "next/link";
-import img from "@/src/assets/404-bg.jpg";
+import img from "@/assets/images/not-found-light.png";
 
 export default function NotFound() {
   return (
