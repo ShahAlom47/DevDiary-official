@@ -1,10 +1,26 @@
+"use client"
+import Image from 'next/image';
 import React from 'react';
-
+import  logo from "@/assets/images/devdiaryLogo_1.png"
+import { NavLink } from './NavLink';
+import { usePathname } from 'next/navigation';
 const Navbar = () => {
+    const pathname = usePathname()
+
+   
     return (
         <div>
-            Navbar
-            Navbar
+           <Image
+                src={logo}
+                alt="Logo"
+                width={100}
+                height={100}
+                className="cursor-pointer"
+            >
+            </Image>
+            <div className="">
+                {NavLink(pathname)}
+            </div>
         </div>
     );
 };
