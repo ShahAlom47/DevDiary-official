@@ -9,7 +9,7 @@ const Navbar = () => {
 
    
     return (
-        <div>
+        <div className=' flex items-center justify-between bg-color-primary '>
            <Image
                 src={logo}
                 alt="Logo"
