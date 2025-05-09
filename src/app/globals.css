@@ -4,7 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme  {
-  --color-color-primary:#160894 ;
+  --color-color-primary:#393939 ;
+  --color-primary-border:#F88C00 ;
 }
 
 @theme inline {
@@ -121,4 +122,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.bb{
+  border: solid 2px red;
 }

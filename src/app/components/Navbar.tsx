@@ -1,25 +1,31 @@
 "use client"
 import Image from 'next/image';
 import React from 'react';
-import  logo from "@/assets/images/devdiaryLogo_1.png"
+import  logo from "@/assets/images/devDiaryLogo.png"
 import { NavLink } from './NavLink';
 import { usePathname } from 'next/navigation';
+import NavSearchBar from './NavSearchBar';
 const Navbar = () => {
     const pathname = usePathname()
 
    
     return (
-        <div className=' flex items-center justify-between bg-color-primary '>
-           <Image
+        <div className=' flex items-center justify-between bg-color-primary text-white border-b-4 border-primary-border   '>
+           
+            <div className=" flex items-center gap-4 ">
+            <Image
                 src={logo}
                 alt="Logo"
                 width={100}
-                height={100}
-                className="cursor-pointer"
+                height={70}
+                className="cursor-pointer h-12 w-auto"
             >
             </Image>
-            <div className="">
                 {NavLink(pathname)}
+            </div>
+            <div>
+                <NavSearchBar></NavSearchBar>
+
             </div>
         </div>
     );
