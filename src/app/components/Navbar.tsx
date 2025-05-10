@@ -5,12 +5,13 @@ import  logo from "@/assets/images/devDiaryLogo.png"
 import { NavLink } from './NavLink';
 import { usePathname } from 'next/navigation';
 import NavSearchBar from './NavSearchBar';
+import BookmarkContainer from './BookmarkContainer';
 const Navbar = () => {
     const pathname = usePathname()
 
    
     return (
-        <div className=' flex items-center justify-between bg-color-primary text-white border-b-4 border-primary-border   '>
+        <div className=' flex items-center justify-between bg-color-primary text-white border-b-4 border-primary-border px-5   '>
            
             <div className=" flex items-center gap-4 ">
             <Image
@@ -23,8 +24,9 @@ const Navbar = () => {
             </Image>
                 {NavLink(pathname)}
             </div>
-            <div>
+            <div className='flex items-center gap-4'>
                 <NavSearchBar></NavSearchBar>
+                <BookmarkContainer></BookmarkContainer>
 
             </div>
         </div>
