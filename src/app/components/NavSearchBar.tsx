@@ -39,11 +39,10 @@ const NavSearchBar = () => {
       ref={containerRef}
       className={`
         relative flex items-center
-        ${isExpanded ? "bg-gray-600 bg-opacity-80 rounded-full" : ""}
+        ${isExpanded ? "bg-gray-600 bg-opacity-80 rounded-full lg:w-[260px] md:w-[150]" : " w-10 "}
         transition-all duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] overflow-hidden
       `}
       style={{
-        width: isExpanded ? "250px" : "40px",
         height: "30px",
         paddingLeft: isExpanded ? "16px" : "0",
         paddingRight: isExpanded ? "8px" : "0",
@@ -59,7 +58,7 @@ const NavSearchBar = () => {
               onChange={handleSearchChange}
               placeholder="Search..."
               className="bg-transparent border-none outline-none text-white w-full 
-                        placeholder:text-white placeholder:opacity-70 text-sm"
+                        placeholder:text-white placeholder:opacity-70 lg:text-sm md:text-sm text-xs"
             />
           </form>
           <button

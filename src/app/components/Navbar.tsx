@@ -8,12 +8,14 @@ import NavSearchBar from './NavSearchBar';
 import BookmarkContainer from './BookmarkContainer';
 import { RiLoginBoxLine } from 'react-icons/ri';
 import Link from 'next/link';
+import MobileNavBar from './MobileNavBar';
 const Navbar = () => {
     const pathname = usePathname()
 
    
     return (
-        <div className=' flex items-center justify-between bg-color-primary text-white border-b-4 border-primary-border px-5   '>
+    <nav className={` bg-color-primary text-white border-b-4 border-primary-border lg:px-5 md:px-3.5 px-2 `}>
+            <div className=' lg:flex md:flex hidden items-center justify-between  '>
            
             <div className=" flex items-center gap-4 ">
             <Image
@@ -32,11 +34,12 @@ const Navbar = () => {
                 <Link href={"/login"} className='text-gray-300 hover:text-gray-100 cursor-pointer'>
                 <RiLoginBoxLine size={20} />
                 </Link>
-
-                
-
             </div>
         </div>
+        <div className={`lg:hidden md:hidden flex items-center justify-between `}>
+            <MobileNavBar></MobileNavBar>
+        </div>
+    </nav>
     );
 };
 

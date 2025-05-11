@@ -1,0 +1,53 @@
+"use client";
+import Image from "next/image";
+import React from "react";
+import logo from "@/assets/images/devDiaryLogo.png";
+import NavSearchBar from "./NavSearchBar";
+import BookmarkContainer from "./BookmarkContainer";
+import Link from "next/link";
+import { RiLoginBoxLine } from "react-icons/ri";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { NavLink } from './NavLink';
+import { usePathname } from 'next/navigation';
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { CgMenuHotdog } from "react-icons/cg";
+
+const MobileNavBar = () => {
+     const pathname = usePathname()
+    
+  return (
+    <div className=" flex items-center justify-between bg-color-primary text-white w-full ">
+      <div className=" flex items-center gap-2 justify-between ">
+        <Drawer direction="left">
+          <DrawerTrigger className=" cursor-pointer pt-1 my-auto">
+            <CgMenuHotdog size={30} />
+          </DrawerTrigger>
+        <DrawerContent className="left-0 top-0 bottom-0 w-[40%] h-full rounded-r-md border bg-color-primary rounded-sm text-white ">
+            <DialogTitle></DialogTitle>
+             {NavLink(pathname)}
+          </DrawerContent>
+          
+        </Drawer>
+        <Image
+          src={logo}
+          alt="Logo"
+          width={100}
+          height={70}
+          className="cursor-pointer h-12 w-auto"
+        ></Image>
+      </div>
+      <div className="flex items-center gap-4 ">
+        <NavSearchBar></NavSearchBar>
+        <BookmarkContainer></BookmarkContainer>
+        <Link
+          href={"/login"}
+          className="text-gray-300 hover:text-gray-100 cursor-pointer"
+        >
+          <RiLoginBoxLine size={20} />
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default MobileNavBar;
