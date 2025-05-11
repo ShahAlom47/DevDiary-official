@@ -14,13 +14,12 @@ const Navbar = () => {
   const pathname = usePathname();
     const { scrollY, scrollDirection } = useScreenInfo();
   const showNavbar = scrollDirection === "up" || scrollY < 100;
-  console.log(scrollY, "dd", scrollDirection);
 
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
-      } bg-color-primary text-white border-b-4 border-primary-border lg:px-5 md:px-3.5 px-2 `}
+      } bg-color-primary text-white border-b-4 border-color-secondary lg:px-5 md:px-3.5 px-2 `}
     >
       <div className=" lg:flex md:flex hidden items-center justify-between  ">
         <div className=" flex items-center gap-4 ">

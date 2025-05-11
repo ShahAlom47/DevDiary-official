@@ -5,7 +5,9 @@
 
 @theme  {
   --color-color-primary:#393939 ;
-  --color-primary-border:#F88C00 ;
+  --color-color-secondary:#F88C00 ;
+  /* --color-color-secondary:#F88C00 ; */
+
 }
 
 @theme inline {
@@ -126,4 +128,9 @@
 
 .bb{
   border: solid 2px red;
+}
+.max-w{
+  max-width: 1400%;
+  margin-right: auto ;
+  margin-left: auto ;
 }
