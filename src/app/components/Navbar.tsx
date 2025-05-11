@@ -6,6 +6,8 @@ import { NavLink } from './NavLink';
 import { usePathname } from 'next/navigation';
 import NavSearchBar from './NavSearchBar';
 import BookmarkContainer from './BookmarkContainer';
+import { RiLoginBoxLine } from 'react-icons/ri';
+import Link from 'next/link';
 const Navbar = () => {
     const pathname = usePathname()
 
@@ -24,9 +26,14 @@ const Navbar = () => {
             </Image>
                 {NavLink(pathname)}
             </div>
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 '>
                 <NavSearchBar></NavSearchBar>
                 <BookmarkContainer></BookmarkContainer>
+                <Link href={"/login"} className='text-gray-300 hover:text-gray-100 cursor-pointer'>
+                <RiLoginBoxLine size={20} />
+                </Link>
+
+                
 
             </div>
         </div>
