@@ -1,8 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { FaGoogle, FaGithub, FaFacebook, FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 import Link from "next/link";
 import PrimaryButton from "@/app/components/PrimaryButton";
+import SocialLogin from "@/app/components/SocialLogin";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -60,17 +64,7 @@ const Login: React.FC = () => {
         </PrimaryButton>
 
         {/* Social Login */}
-        <div className="flex gap-4 justify-center mb-4">
-          <button type="button" className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
-            <FaFacebook size={15} />
-          </button>
-          <button type="button" className="bg-black text-white p-2 rounded-full hover:bg-gray-800">
-            <FaGithub size={15} />
-          </button>
-          <button type="button" className="bg-red-600 text-white p-2 rounded-full hover:bg-red-700">
-            <FaGoogle size={15} />
-          </button>
-        </div>
+        <SocialLogin></SocialLogin>
 
         {/* Register & Home Links */}
         <div className="text-center text-sm text-white">
