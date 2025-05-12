@@ -7,18 +7,36 @@ import {
 import Link from "next/link";
 import PrimaryButton from "@/app/components/PrimaryButton";
 import SocialLogin from "@/app/components/SocialLogin";
+import { useLoading } from "@/hooks/useLoading";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { loading, startLoading, stopLoading } = useLoading();
+  const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async(e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+   startLoading();
 
-    // ekhane backend request pathao or validation koro
+    const res = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
+
+    stopLoading();
+
+    if (res?.ok) {
+      toast.success("Login successful!");
+      router.push("/");
+    } else {
+      toast.error(res?.error || "Invalid credentials");
+    }
   };
 
   return (
@@ -59,7 +77,7 @@ const Login: React.FC = () => {
           </div>
         </div>
 
-        <PrimaryButton className="w-full mb-3 rounded-sm" type="submit">
+        <PrimaryButton isLoading={loading} className="w-full mb-3 rounded-sm" type="submit">
           Login
         </PrimaryButton>
 

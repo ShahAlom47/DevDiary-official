@@ -102,7 +102,7 @@ const onSubmit: SubmitHandler<IFormInput> = async (data) => {
             <p className="text-red-500 text-xs">{errors.password.message}</p>
           )}
         </div>
-        <PrimaryButton className="w-full mb-3 rounded-sm" type="submit">
+        <PrimaryButton className="w-full mb-3 rounded-sm" type="submit" isLoading={loading}>
           Register
         </PrimaryButton>
         {/* Social Login */}

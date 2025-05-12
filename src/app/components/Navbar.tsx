@@ -10,10 +10,14 @@ import { RiLoginBoxLine } from "react-icons/ri";
 import Link from "next/link";
 import MobileNavBar from "./MobileNavBar";
 import useScreenInfo from "@/hooks/useScreenInfo";
+import { useSession } from "next-auth/react";
 const Navbar = () => {
   const pathname = usePathname();
+  const session= useSession();
     const { scrollY, scrollDirection } = useScreenInfo();
   const showNavbar = scrollDirection === "up" || scrollY < 100;
+
+  console.log("Navbar session", session);
 
   return (
     <nav
