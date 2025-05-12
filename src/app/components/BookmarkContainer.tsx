@@ -15,9 +15,9 @@ import { Tabs,TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const BookmarkContainer = () => {
   return (
-    <div>
+    <div >
       <Drawer>
-        <DrawerTrigger className=" cursor-pointer pt-1 my-auto">
+        <DrawerTrigger className=" cursor-pointer pt-1 my-auto " title="Bookmark">
           <BsFillJournalBookmarkFill />
         </DrawerTrigger>
         <DrawerContent className="  border-l-8  border-color-secondary  ">

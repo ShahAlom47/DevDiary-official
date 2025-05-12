@@ -6,18 +6,15 @@ import { NavLink } from "./NavLink";
 import { usePathname } from "next/navigation";
 import NavSearchBar from "./NavSearchBar";
 import BookmarkContainer from "./BookmarkContainer";
-import { RiLoginBoxLine } from "react-icons/ri";
-import Link from "next/link";
 import MobileNavBar from "./MobileNavBar";
 import useScreenInfo from "@/hooks/useScreenInfo";
-import { useSession } from "next-auth/react";
+import NavAuthMenu from "./NavAuthMenu";
 const Navbar = () => {
   const pathname = usePathname();
-  const session= useSession();
-    const { scrollY, scrollDirection } = useScreenInfo();
+  const { scrollY, scrollDirection } = useScreenInfo();
   const showNavbar = scrollDirection === "up" || scrollY < 100;
 
-  console.log("Navbar session", session);
+
 
   return (
     <nav
@@ -39,12 +36,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4 ">
           <NavSearchBar></NavSearchBar>
           <BookmarkContainer></BookmarkContainer>
-          <Link
-            href={"/login"}
-            className="text-gray-300 hover:text-gray-100 cursor-pointer"
-          >
-            <RiLoginBoxLine size={20} />
-          </Link>
+        <NavAuthMenu></NavAuthMenu>
         </div>
       </div>
       <div className={`lg:hidden md:hidden flex items-center justify-between `}>

@@ -4,13 +4,12 @@ import React from "react";
 import logo from "@/assets/images/devDiaryLogo.png";
 import NavSearchBar from "./NavSearchBar";
 import BookmarkContainer from "./BookmarkContainer";
-import Link from "next/link";
-import { RiLoginBoxLine } from "react-icons/ri";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { NavLink } from './NavLink';
 import { usePathname } from 'next/navigation';
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { CgMenuHotdog } from "react-icons/cg";
+import NavAuthMenu from "./NavAuthMenu";
 
 const MobileNavBar = () => {
      const pathname = usePathname()
@@ -39,12 +38,7 @@ const MobileNavBar = () => {
       <div className="flex items-center gap-4 ">
         <NavSearchBar></NavSearchBar>
         <BookmarkContainer></BookmarkContainer>
-        <Link
-          href={"/login"}
-          className="text-gray-300 hover:text-gray-100 cursor-pointer"
-        >
-          <RiLoginBoxLine size={20} />
-        </Link>
+      <NavAuthMenu></NavAuthMenu>
       </div>
     </div>
   );
