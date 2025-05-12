@@ -83,11 +83,7 @@ export const POST = async (req: Request): Promise<NextResponse> => {
       {
         success: true,
         message: "User registered successfully",
-        data: {
-          email,
-          name,
-          photoUrl: photoUrl || null
-        }
+        data: result
       },
       { status: 201 }
     );

@@ -5,8 +5,13 @@ import Link from "next/link";
 import PrimaryButton from "@/app/components/PrimaryButton";
 import SocialLogin from "@/app/components/SocialLogin"; // SocialLogin Component Import
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { registerUser } from "@/lib/allApiRequest/apiRequests";
+import toast from "react-hot-toast";
+import { handleApiError } from "@/utils/handleApiError";
+import { useRouter } from "next/navigation";
+import { useLoading } from "@/hooks/useLoading";
 
-interface IFormInput {
+export interface IFormInput {
   name: string;
   email: string;
   password: string;
@@ -14,17 +19,38 @@ interface IFormInput {
 
 const Register: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+    const { loading, startLoading, stopLoading } = useLoading();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    
-    console.log(data);
-   console.log(data)
-  };
+const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  try {
+    startLoading(); // Start loading state
+    const res = await registerUser({ ...data });
+
+    if (res?.success) {
+      toast.success(res.message || "Registration successful");
+      router.push("/login"); // Redirect to login page after successful registration
+
+
+
+    } else {
+      toast.error(res.message || "Registration failed");
+      console.warn("Server responded with success: false", res);
+   
+
+    }
+  } catch (error) {
+    handleApiError(error);  // Use the centralized error handler
+  } finally {
+    console.log("Form Data:", data);
+    stopLoading(); // Stop loading state
+  }
+};
 
   return (
     <div className="max-w flex flex-col items-center justify-center h-screen bg-gray-100">

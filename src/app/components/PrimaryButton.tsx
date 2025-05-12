@@ -5,10 +5,12 @@ import clsx from "clsx";
 type PrimaryButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   className?: string;
+  isLoading?: boolean;
 };
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   children,
+  isLoading = false,
   className = "",
   ...rest
 }) => {
@@ -20,7 +22,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
         className
       )}
     >
-      {children}
+      {isLoading?"": children}
     </button>
   );
 };
