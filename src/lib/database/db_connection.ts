@@ -1,13 +1,14 @@
-// lib/mongodb.js
-import { MongoClient, ServerApiVersion } from "mongodb";
+// lib/mongodb.ts
+import { MongoClient, ServerApiVersion, Db } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
+const uri: string = process.env.MONGODB_URI as string;
 
-let client;
-let clientPromise;
+let client: MongoClient;
+let clientPromise: Promise<MongoClient>;
 
 if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClientPromise) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (!(global as any)._mongoClientPromise) {
     client = new MongoClient(uri, {
       serverApi: {
         version: ServerApiVersion.v1,
@@ -15,9 +16,10 @@ if (process.env.NODE_ENV === "development") {
         deprecationErrors: true,
       },
     });
-    global._mongoClientPromise = client.connect();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (global as any)._mongoClientPromise = client.connect();
   }
-  clientPromise = global._mongoClientPromise;
+  clientPromise = (global as typeof globalThis & { _mongoClientPromise?: Promise<MongoClient> })._mongoClientPromise!;
 } else {
   client = new MongoClient(uri, {
     serverApi: {
@@ -29,10 +31,10 @@ if (process.env.NODE_ENV === "development") {
   clientPromise = client.connect();
 }
 
-const checkConnection = async () => {
+const checkConnection = async (): Promise<void> => {
   try {
-    const client = await clientPromise;
-    const db = client.db(); // You can specify your database name here if needed
+    const client: MongoClient = await clientPromise;
+    const db: Db = client.db(); // You can specify your database name here if needed
     await db.command({ ping: 1 }); // Send a ping to the server to check the connection
     console.log("MongoDB connected successfully!");
   } catch (error) {

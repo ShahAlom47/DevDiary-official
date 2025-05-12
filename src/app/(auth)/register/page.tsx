@@ -21,8 +21,9 @@ const Register: React.FC = () => {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    
     console.log(data);
-    // Send data to backend
+   console.log(data)
   };
 
   return (

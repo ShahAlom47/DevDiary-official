@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { getUserCollection } from "@/lib/database/db_collections";
+import { MongoServerError } from "mongodb";
 
 // Define the types for the request body
 interface RequestBody {
-  userId: string;
   email: string;
   password: string;
   role?: string;
@@ -12,63 +12,107 @@ interface RequestBody {
   name: string;
 }
 
-export const POST = async (req: Request) => {
+export const POST = async (req: Request): Promise<NextResponse> => {
   try {
     const usersCollection = await getUserCollection();
     const body: RequestBody = await req.json();
 
-    const { userId, email, password, role, photoUrl, name } = body;
+    const { email, password, name, photoUrl } = body;
 
-    if (!email || !password || !userId) {
+    // Validation
+    if (!email || !password || !name) {
       return NextResponse.json(
-        { message: "All fields are required" },
+        { 
+          message: "Email, password and name are required",
+          success: false
+        },
         { status: 400 }
       );
     }
 
-    // Check if email or userId already exists
-    const existingUser = await usersCollection.findOne({
-      $or: [{ email }, { userId }],
-    });
+    // Email format validation (basic check)
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json(
+        { 
+          message: "Please provide a valid email address",
+          success: false
+        },
+        { status: 400 }
+      );
+    }
+
+    // Check if user already exists
+    const existingUser = await usersCollection.findOne({ email });
 
     if (existingUser) {
       return NextResponse.json(
-        { message: "Email or User ID already exists. Please check your email and try again" },
+        { 
+          message: "Email already exists. Please use a different email.",
+          success: false
+        },
         { status: 409 }
       );
     }
 
-    // Hash the password before storing it
+    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Insert new user with hashed password
+    // Create new user
     const result = await usersCollection.insertOne({
-      userId,
       email,
       name,
       password: hashedPassword,
-      role,
-      photoUrl,
+      role: "user", // Default role
+      photoUrl: photoUrl || null,
+      createdAt: new Date(),
+      updatedAt: new Date()
     });
+
+    if (!result.acknowledged) {
+      return NextResponse.json(
+        {
+          success: false,  
+          message: "Failed to register user",
+        },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       {
+        success: true,
         message: "User registered successfully",
-        userId: result.insertedId.toString(),
+        data: {
+          email,
+          name,
+          photoUrl: photoUrl || null
+        }
       },
       { status: 201 }
     );
   } catch (error: unknown) {
+    // Handle MongoDB duplicate key error specifically
+    if (error instanceof MongoServerError && error.code === 11000) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "User already exists",
+        },
+        { status: 409 }
+      );
+    }
+
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    console.error("Registration error:", error);
+    
     return NextResponse.json(
       {
+        success: false,
         message: "Internal server error",
-        error: errorMessage,
+        error: process.env.NODE_ENV === "development" ? errorMessage : undefined,
       },
       { status: 500 }
     );
   }
 };
-
-export default POST;
