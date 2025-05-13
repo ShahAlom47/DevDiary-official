@@ -35,7 +35,7 @@ const MobileNavBar = () => {
           className="cursor-pointer h-12 w-auto"
         ></Image>
       </div>
-      <div className="flex items-center gap-4 ">
+      <div className="flex items-center gap-1 ">
         <NavSearchBar></NavSearchBar>
         <BookmarkContainer></BookmarkContainer>
         <ThemeChanger></ThemeChanger>
