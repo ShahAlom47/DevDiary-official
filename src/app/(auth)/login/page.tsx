@@ -5,8 +5,8 @@ import {
   FaEyeSlash,
 } from "react-icons/fa";
 import Link from "next/link";
-import PrimaryButton from "@/app/components/PrimaryButton";
-import SocialLogin from "@/app/components/SocialLogin";
+import PrimaryButton from "@/components/PrimaryButton";
+import SocialLogin from "@/components/SocialLogin";
 import { useLoading } from "@/hooks/useLoading";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";

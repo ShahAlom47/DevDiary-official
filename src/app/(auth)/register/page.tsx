@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
-import PrimaryButton from "@/app/components/PrimaryButton";
-import SocialLogin from "@/app/components/SocialLogin"; // SocialLogin Component Import
+import PrimaryButton from "@/components/PrimaryButton";
+import SocialLogin from "@/components/SocialLogin"; // SocialLogin Component Import
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { registerUser } from "@/lib/allApiRequest/apiRequests";
 import toast from "react-hot-toast";

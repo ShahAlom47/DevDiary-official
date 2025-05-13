@@ -9,6 +9,7 @@ import BookmarkContainer from "./BookmarkContainer";
 import MobileNavBar from "./MobileNavBar";
 import useScreenInfo from "@/hooks/useScreenInfo";
 import NavAuthMenu from "./NavAuthMenu";
+import ThemeChanger from "./ThemeChanger";
 const Navbar = () => {
   const pathname = usePathname();
   const { scrollY, scrollDirection } = useScreenInfo();
@@ -18,7 +19,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-500 ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
       } bg-color-primary text-white border-b-4 border-color-secondary lg:px-5 md:px-3.5 px-2 `}
     >
@@ -36,6 +37,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4 ">
           <NavSearchBar></NavSearchBar>
           <BookmarkContainer></BookmarkContainer>
+          <ThemeChanger></ThemeChanger>
         <NavAuthMenu></NavAuthMenu>
         </div>
       </div>
