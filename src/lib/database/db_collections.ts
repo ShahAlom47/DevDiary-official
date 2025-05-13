@@ -7,6 +7,6 @@ import { User } from "../interfaces/interfaces";
 
 export const getUserCollection = async (): Promise<Collection<User>> => {
   const client = await clientPromise;
-  const db: Db = client.db("learning_quran");
+  const db: Db = client.db("devDiary");
   return db.collection<User>("users");
 };
