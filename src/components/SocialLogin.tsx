@@ -2,10 +2,10 @@
 
 import React from "react";
 import { signIn } from "next-auth/react";
-import { FaGoogle, FaGithub, FaFacebook } from "react-icons/fa";
+import { FaGoogle, FaGithub, FaFacebook, FaLinkedin } from "react-icons/fa";
 
 // 👉 Reusable sign-in handler
-const handleSignIn = (provider: "google" | "github" | "facebook") => {
+const handleSignIn = (provider: "google" | "github" | "facebook"|"linkedin") => {
   signIn(provider, { callbackUrl: "/" });
 };
 
@@ -35,6 +35,14 @@ const SocialLogin: React.FC = () => {
         aria-label="Sign in with Google"
       >
         <FaGoogle size={15} />
+      </button>
+      <button
+        type="button"
+        onClick={() => handleSignIn("linkedin")}
+        className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700"
+        aria-label="Sign in with Google"
+      >
+        <FaLinkedin size={15} />
       </button>
     </div>
   );
