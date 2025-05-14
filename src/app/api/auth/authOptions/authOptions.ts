@@ -1,15 +1,17 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
+import FacebookProvider from "next-auth/providers/facebook";
 import bcrypt from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import { getUserCollection } from "@/lib/database/db_collections";
 
-// Extend the User type to include the 'role' and 'photoUrl' properties
+// Extend the User type to include the 'role' and 'image' properties
 declare module "next-auth" {
   interface User {
     id: string;
     role?: string;
-    photoUrl?: string | null;
+    image?: string | null;
   }
 
   interface Session {
@@ -18,17 +20,17 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       role?: string;
-      photoUrl?: string | null;
+      image?: string | null;
     };
   }
 }
 
-// Extend the JWT type to include custom fields like 'role', 'id', and 'photoUrl'
+// Extend the JWT type to include custom fields like 'role', 'id', and 'image'
 declare module "next-auth/jwt" {
   interface JWT {
     id?: string;
     role?: string;
-    photoUrl?: string | null;
+    image?: string | null;
   }
 }
 
@@ -68,16 +70,25 @@ export const authOptions: NextAuthOptions = {
           name: existingUser.name,
           email: existingUser.email,
           role: existingUser.role || "user",  // Default role if not provided
-          photoUrl: existingUser.photoUrl || null  // Default photoUrl if not available
+          image: existingUser.image || null  // Default image if not available
         };
       }
     }),
 
     // 🟢 Google OAuth Provider (optional)
-    GoogleProvider({
+   
+      GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
-    })
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+    }),
   ],
 
   // ✅ 2. Session Configuration
@@ -94,7 +105,7 @@ export const authOptions: NextAuthOptions = {
         token.name = user.name;
         token.email = user.email;
         token.role = user.role;
-        token.photoUrl = user.photoUrl;
+        token.image = user.image;
       }
       return token;
     },
@@ -106,7 +117,7 @@ export const authOptions: NextAuthOptions = {
         session.user.name = token.name;
         session.user.email = token.email;
         session.user.role = token.role;
-        session.user.photoUrl = token.photoUrl ?? null;  // Handle fallback for null
+        session.user.image = token.image ?? null;  // Handle fallback for null
       }
       return session;
     }

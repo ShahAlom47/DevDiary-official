@@ -3,7 +3,7 @@ export interface User {
   name: string;
   password: string;
   role?: string;
-  photoUrl?: string | null;
+  image?: string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 }

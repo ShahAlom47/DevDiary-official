@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-color-primary dark:bg-gray-900 text-gray-100 dark:text-gray-200 mt-10 py-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-3 gap-5 items-start  bg-">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-3 gap-5 items-start  justify-betwee">
         {/* Logo Section */}
       <div className="flex flex-col space-y-3 col-span-2 md:col-span-1 row-span-1 row-start-1 mb-5">
 
@@ -40,7 +40,7 @@ const Footer = () => {
         </div>
 
         {/* Social Links */}
-        <div className=" md: cols-span-1 row-span-1 md:row-start-1 row-start-2">
+        <div className=" md: cols-span-1 row-span-1 md:row-start-1 row-start-2  ml-aut">
           <h2 className="text-lg font-bold mb-2">Follow Me</h2>
           <div className="flex space-x-2  flex-col  gap-2">
             <a

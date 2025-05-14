@@ -15,6 +15,8 @@ import { ImSpinner3 } from "react-icons/im";
 const NavAuthMenu = () => {
   const { data: session, status } = useSession();
 
+  console.log(session)
+
   if (status === "loading") return <div> <ImSpinner3 className="animate-spin" /></div>;
 
   return (
