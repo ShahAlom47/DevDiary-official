@@ -1,45 +1,84 @@
-"use client"
-import React from 'react';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { NavLink } from './NavLink';
+"use client";
+import React from "react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { NavLink } from "./NavLink";
 import logo from "@/assets/images/devDiaryLogo.png";
+import { FaFacebook, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   const pathname = usePathname();
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 mt-10 py-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-        
+    <footer className="bg-color-primary dark:bg-gray-900 text-gray-100 dark:text-gray-200 mt-10 py-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-3 gap-5 items-start  bg-">
         {/* Logo Section */}
-        <div className="flex items-center space-x-3">
-          <Image src={logo} alt="devDiary Logo" width={50} height={50} />
-          <span className="text-xl font-semibold">devDiary</span>
+      <div className="flex flex-col space-y-3 col-span-2 md:col-span-1 row-span-1 row-start-1 mb-5">
+
+          <Image
+            src={logo}
+            alt="devDiary Logo"
+            width={50}
+            height={50}
+            className=" w-24 -ml-3"
+          />
+          <span className="text-2xl font-semibold text-color-secondary">
+            DevDiary
+          </span>
+          <p className="text-sm text-gray-300 dark:text-gray-400 md:max-w-xs w-full  mt-3">
+            A digital diary for developers — sharing code snippets, lessons, and
+            progress to grow together in the tech journey.
+          </p>
         </div>
 
         {/* Navigation Links */}
-        <div>
-          <h2 className="text-lg font-bold mb-2">Links</h2>
-          <nav className="space-y-1 flex flex-col">
+        <div className="md: cols-span-1 row-span-1 md:row-start-1 row-start-2">
+          <h2 className="text-lg font-bold mb-2 ml-3 ">Links</h2>
+          <nav className="  grid grid-cols-2  gap-1 w-fit   ">
             {NavLink(pathname)}
           </nav>
         </div>
 
         {/* Social Links */}
-        <div>
+        <div className=" md: cols-span-1 row-span-1 md:row-start-1 row-start-2">
           <h2 className="text-lg font-bold mb-2">Follow Me</h2>
-          <div className="flex space-x-4">
-            <a href="#" aria-label="Twitter" className="hover:text-blue-500">🐦</a>
-            <a href="#" aria-label="GitHub" className="hover:text-gray-800 dark:hover:text-white">💻</a>
-            <a href="#" aria-label="YouTube" className="hover:text-red-500">📺</a>
+          <div className="flex space-x-2  flex-col  gap-2">
+            <a
+              href="#"
+              aria-label="Facebook"
+              className="hover:text-color-secondary flex items-center gap-2"
+            >
+              <FaFacebook className="text-blue-400" /> Facebook
+            </a>
+            <a
+              href="#"
+              aria-label="GitHub"
+              className="hover:text-color-secondary flex items-center gap-2"
+            >
+              <FaGithub className="text-white" />
+              GitHub
+            </a>
+            <a
+              href="#"
+              aria-label="YouTube"
+              className="hover:text-color-secondary flex items-center gap-2"
+            >
+              <FaYoutube className="text-red-500" />
+              YouTube
+            </a>
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="hover:text-color-secondary flex items-center gap-2"
+            >
+              <FaLinkedin className="text-blue-400" /> LinkedIn
+            </a>
           </div>
         </div>
-
       </div>
 
       {/* Footer Bottom */}
-      <div className="text-center mt-8 text-sm text-gray-500 dark:text-gray-400">
+      <div className="text-center mt-8 text-sm text-gray-400 dark:text-gray-400">
         © {new Date().getFullYear()} devDiary — All rights reserved.
       </div>
     </footer>

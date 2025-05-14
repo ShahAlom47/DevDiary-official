@@ -4,7 +4,7 @@ import Link from "next/link";
 export const NavLink = (pathname: string) => {
     const getLinkClasses = (path: string) => {
       const isActive = pathname === path;
-      return `px-4 py-2  ${isActive ? "text-color-secondary" : "hover:text-color-secondary"}   transition duration-300 ease-in-out`; 
+      return `px-4 py-1  ${isActive ? "text-color-secondary" : "hover:text-color-secondary"}   transition duration-300 ease-in-out`; 
     };
   
     return (
