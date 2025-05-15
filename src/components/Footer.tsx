@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { NavLink } from "./NavLink";
 import logo from "@/assets/images/devDiaryLogo.png";
 import { FaFacebook, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
+import SocialLink from "./SocialLink";
 
 const Footer = () => {
   const pathname = usePathname();
@@ -43,36 +44,7 @@ const Footer = () => {
         <div className=" md: cols-span-1 row-span-1 md:row-start-1 row-start-2  ml-aut">
           <h2 className="text-lg font-bold mb-2">Follow Me</h2>
           <div className="flex space-x-2  flex-col  gap-2">
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="hover:text-color-secondary flex items-center gap-2"
-            >
-              <FaFacebook className="text-blue-400" /> Facebook
-            </a>
-            <a
-              href="#"
-              aria-label="GitHub"
-              className="hover:text-color-secondary flex items-center gap-2"
-            >
-              <FaGithub className="text-white" />
-              GitHub
-            </a>
-            <a
-              href="#"
-              aria-label="YouTube"
-              className="hover:text-color-secondary flex items-center gap-2"
-            >
-              <FaYoutube className="text-red-500" />
-              YouTube
-            </a>
-            <a
-              href="#"
-              aria-label="LinkedIn"
-              className="hover:text-color-secondary flex items-center gap-2"
-            >
-              <FaLinkedin className="text-blue-400" /> LinkedIn
-            </a>
+           <SocialLink></SocialLink>
           </div>
         </div>
       </div>
