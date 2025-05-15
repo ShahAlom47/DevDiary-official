@@ -54,14 +54,14 @@ export default function ContactPage() {
         </div>
 
         {/* Right: Contact Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-gray-200 dark:bg-gray-400/40 p-5 rounded-sm">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
               Name
             </label>
             <input
               {...register("name", { required: "Name is required" })}
-              className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 dark:text-white"
+              className="w-full px-2 py-2 rounded-md  border-b-2 border-color-secondary  dark:text-white  outline-none"
               placeholder="Your Name"
             />
             {errors.name && (
@@ -81,7 +81,7 @@ export default function ContactPage() {
                   message: "Invalid email address",
                 },
               })}
-              className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 dark:text-white"
+                   className="w-full px-2 py-2 rounded-md  border-b-2 border-color-secondary  dark:text-white  outline-none"
               placeholder="you@example.com"
             />
             {errors.email && (
@@ -96,7 +96,7 @@ export default function ContactPage() {
             <textarea
               {...register("message", { required: "Message is required" })}
               rows={5}
-              className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 dark:text-white"
+                  className="w-full px-2 py-2 rounded-md  border-2 border-color-secondary  dark:text-white  outline-none"
               placeholder="Write your message..."
             />
             {errors.message && (
