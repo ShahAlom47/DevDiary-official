@@ -1,31 +1,66 @@
-'use client';
+"use client";
 
-import { FaGithub, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import Image from "next/image";
+import SocialLink from "@/components/SocialLink"; // Make sure this handles icons + links
+import Link from "next/link";
 
 export default function About() {
   return (
-    <section id="about" className="w-full py-12 px-4 md:px-16 bg-white dark:bg-gray-900">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-6">
+    <section
+      id="about"
+      className="w-full py-12 px-4 md:px-16 bg-white dark:bg-gray-900"
+    >
+      <div className="max-w-5xl mx-auto flex flex-col items-start space-y-8">
+        {/* Heading */}
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
           About Me
         </h2>
-        
+
+        {/* Profile Image */}
+        <Image
+          src="/your-image.jpg" // Replace with your image path
+          alt="Shah Alom"
+          width={120}
+          height={120}
+          className="rounded-full border-4 border-gray-300 dark:border-gray-700"
+        />
+
         {/* Short Bio */}
-        <p className="text-gray-700 dark:text-gray-300 text-lg mb-6">
-          I`m Shah Alom, a passionate Front-End Developer with a focus on building clean, user-friendly web interfaces.
-          I enjoy turning complex problems into simple, beautiful designs. I love learning new technologies and sharing my journey through blogs and tutorials.
+        <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+          I`m <strong>Shah Alom</strong>, a creative front-end developer who loves building
+          modern, responsive user interfaces. I created this web app to document
+          my journey, share what I learn, and explore new technologies through
+          hands-on projects. Whether it`s writing blog posts, sharing code
+          snippets, or experimenting with new tools — I`m always learning and
+          building.
         </p>
 
         {/* Skills & Technologies */}
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Skills & Technologies</h3>
+        <div>
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+            Skills & Technologies
+          </h3>
           <div className="flex flex-wrap gap-3 text-sm">
             {[
-              'HTML', 'CSS', 'JavaScript', "TypeScript", 'React.js', 'Next.js',
-              'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB',
-              'Firebase', 'JWT', 'Git', 'GitHub'
+              "HTML",
+              "CSS",
+              "JavaScript",
+              "TypeScript",
+              "React.js",
+              "Next.js",
+              "Tailwind CSS",
+              "Node.js",
+              "Express.js",
+              "MongoDB",
+              "Firebase",
+              "JWT",
+              "Git",
+              "GitHub",
             ].map((skill, i) => (
-              <span key={i} className="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full">
+              <span
+                key={i}
+                className="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full"
+              >
                 {skill}
               </span>
             ))}
@@ -33,24 +68,23 @@ export default function About() {
         </div>
 
         {/* Social Links */}
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Connect with Me</h3>
-          <div className="flex gap-6 text-2xl text-gray-700 dark:text-gray-300">
-            <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-            <a href="https://www.youtube.com/@your-channel" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
-            <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+        <div>
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+            Connect with Me
+          </h3>
+          <div className="flex gap-6 text-xl text-gray-700 dark:text-gray-300">
+            <SocialLink />
           </div>
         </div>
 
-        {/* Project Overview */}
-        <div>
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">📝 Project Overview: devDiary</h3>
-          <p className="text-gray-700 dark:text-gray-300">
-            devDiary is a personal knowledge-sharing website built with <strong>Next.js</strong>, designed like a developer`s digital diary.
-            It allows me to document and share my coding journey, YouTube tutorials, code snippets, and daily learnings in blog-style entries.
-            The platform includes a clean blog UI, responsive design with Tailwind CSS, and secure user authentication using <strong>NextAuth.js</strong>.
-          </p>
-        </div>
+        {/* Redirect to Contact Page */}
+        <p className="text-md text-gray-600 dark:text-gray-400">
+          Want to reach out?
+          <Link 
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+          href={"/contact"}> Visit the contact page</Link>
+          to send me a message!
+        </p>
       </div>
     </section>
   );

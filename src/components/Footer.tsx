@@ -4,7 +4,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { NavLink } from "./NavLink";
 import logo from "@/assets/images/devDiaryLogo.png";
-import { FaFacebook, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
 import SocialLink from "./SocialLink";
 
 const Footer = () => {
