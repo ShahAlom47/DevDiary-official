@@ -8,7 +8,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="w-full py-12 px-4 md:px-16 bg-white dark:bg-gray-900"
+      className="max-w py-12 px-4 md:px-16 bg-light  dark:bg-dark"
     >
       <div className="max-w-5xl mx-auto flex flex-col items-start space-y-8">
         {/* Heading */}
@@ -72,7 +72,7 @@ export default function About() {
           <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
             Connect with Me
           </h3>
-          <div className="flex gap-6 text-xl text-gray-700 dark:text-gray-300">
+          <div className="flex gap-6 text-xl flex-wrap text-gray-700 dark:text-gray-300">
             <SocialLink />
           </div>
         </div>

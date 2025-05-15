@@ -5,7 +5,9 @@
 
 @theme  {
   --color-color-primary:var(--primary); ;
-  --color-color-secondary:var(--secondary); ;
+  --color-color-secondary:var(--secondary); 
+  --color-bg-light:#f6f3f4; 
+  --color-bg-dark:#121419; 
   /* --color-color-secondary:#F88C00 ; */
 
 }
