@@ -19,7 +19,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     <button
       {...rest}
       className={clsx(
-        "px-5 py-2 rounded-md font-semibold text-white bg-color-secondary hover:bg-gray-600 transition duration-200 disabled:opacity-50 cursor-pointer flex items-center justify-center",
+        "px-5 py-2 rounded-sm font-semibold text-white bg-color-secondary hover:bg-gray-600 transition duration-200 disabled:opacity-50 cursor-pointer flex items-center justify-center",
         className
       )}
     >

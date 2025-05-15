@@ -1,4 +1,4 @@
-"use client";
+
 
 import Image from "next/image";
 import SocialLink from "@/components/SocialLink"; // Make sure this handles icons + links
