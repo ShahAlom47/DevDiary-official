@@ -21,6 +21,7 @@ if (process.env.NODE_ENV === "development") {
   }
   clientPromise = (global as typeof globalThis & { _mongoClientPromise?: Promise<MongoClient> })._mongoClientPromise!;
 } else {
+
   client = new MongoClient(uri, {
     serverApi: {
       version: ServerApiVersion.v1,
@@ -32,6 +33,8 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const checkConnection = async (): Promise<void> => {
+  console.log("uuuuuuuuuuuuuuuuuuuuuuu",uri)
+
   try {
     const client: MongoClient = await clientPromise;
     const db: Db = client.db(); // You can specify your database name here if needed

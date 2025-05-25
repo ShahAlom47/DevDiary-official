@@ -1,7 +1,7 @@
 import { getUserCollection } from "@/lib/database/db_collections";
 import { NextResponse } from "next/server";
 
-export const GET=async () => {
+export const GET=async (): Promise<NextResponse> => {
 
     const usersCollection = await getUserCollection();
     const res = await usersCollection.find({}).toArray()

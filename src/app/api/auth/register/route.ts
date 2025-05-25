@@ -13,6 +13,7 @@ interface RequestBody {
 }
 
 export const POST = async (req: Request): Promise<NextResponse> => {
+  console.log(req.method, req.url);
   try {
     const usersCollection = await getUserCollection();
     const body: RequestBody = await req.json();
