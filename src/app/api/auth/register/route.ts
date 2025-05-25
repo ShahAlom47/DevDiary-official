@@ -17,7 +17,8 @@ export const POST = async (req: Request): Promise<NextResponse> => {
     const usersCollection = await getUserCollection();
     const body: RequestBody = await req.json();
 
-    const { email, password, name, photoUrl } = body;
+    const { email, password, name,  } = body;
+    console.log( email, password, name);
 
     // Validation
     if (!email || !password || !name) {
@@ -64,7 +65,6 @@ export const POST = async (req: Request): Promise<NextResponse> => {
       name,
       password: hashedPassword,
       role: "user", // Default role
-      photoUrl: photoUrl || null,
       createdAt: new Date(),
       updatedAt: new Date()
     });

@@ -42,43 +42,84 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "example@example.com" },
-        password: { label: "Password", type: "password" }
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "example@example.com",
+        },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         const usersCollection = await getUserCollection();
 
-        // ✋ Validate presence of email and password
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Missing email or password");
-        }
+        try {
+          // ✋ Check required fields
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error(
+              JSON.stringify({
+                code: "MISSING_CREDENTIALS",
+                message: "Email and password are required.",
+              })
+            );
+          }
 
-        // 🔍 Check if user exists
-        const existingUser = await usersCollection.findOne({ email: credentials.email });
-        if (!existingUser) {
-          throw new Error("User not found");
-        }
+          // 🔍 Check user
+          const existingUser = await usersCollection.findOne({
+            email: credentials.email,
+          });
+          if (!existingUser) {
+            throw new Error(
+              JSON.stringify({
+                code: "USER_NOT_FOUND",
+                message: "No account found with this email.",
+              })
+            );
+          }
 
-        // 🔑 Compare hashed password
-        const isValid = await bcrypt.compare(credentials.password, existingUser.password);
-        if (!isValid) {
-          throw new Error("Invalid password");
-        }
+          // 🔐 Password check
+          const isValid = await bcrypt.compare(
+            credentials.password,
+            existingUser.password
+          );
+          if (!isValid) {
+            throw new Error(
+              JSON.stringify({
+                code: "INVALID_PASSWORD",
+                message: "Incorrect password. Please try again.",
+              })
+            );
+          }
 
-        // ✅ Return user object for session
-        return {
-          id: existingUser._id.toString(),
-          name: existingUser.name,
-          email: existingUser.email,
-          role: existingUser.role || "user",  // Default role if not provided
-          image: existingUser.image || null  // Default image if not available
-        };
-      }
+          // ✅ Authenticated
+          return {
+            id: existingUser._id.toString(),
+            name: existingUser.name,
+            email: existingUser.email,
+            role: existingUser.role || "user",
+            image: existingUser.image || null,
+          };
+        } catch (err) {
+          // Parse error message if it's JSON
+          if (
+            typeof err === "object" &&
+            err !== null &&
+            "message" in err &&
+            typeof (err as { message: unknown }).message === "string" &&
+            ((err as { message: string }).message).startsWith("{")
+          ) {
+            const parsed = JSON.parse((err as { message: string }).message);
+            throw new Error(parsed.message); // Only expose safe message
+          }
+          // Generic fallback
+          throw new Error(
+            "Login failed due to a server error. Please try again later."
+          );
+        }
+      },
     }),
-
     // 🟢 Google OAuth Provider (optional)
-   
-      GoogleProvider({
+
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
@@ -99,7 +140,7 @@ export const authOptions: NextAuthOptions = {
   // ✅ 2. Session Configuration
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60 // 30 days
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
 
   // ✅ 3. JWT Callback — stores custom user info in token
@@ -118,23 +159,23 @@ export const authOptions: NextAuthOptions = {
     // ✅ 4. Session Callback — makes token values available in `session.user`
     async session({ session, token }) {
       if (session?.user) {
-        session.user.id = token.id as string;  // Explicitly cast to string
+        session.user.id = token.id as string; // Explicitly cast to string
         session.user.name = token.name;
         session.user.email = token.email;
         session.user.role = token.role;
-        session.user.image = token.image ?? null;  // Handle fallback for null
+        session.user.image = token.image ?? null; // Handle fallback for null
       }
       return session;
-    }
+    },
   },
 
   // ✅ 5. Custom Pages (login, error)
   pages: {
-    signIn: "/login",   // custom login page
-    error: "/login"     // redirect to login on auth error
+    signIn: "/login", // custom login page
+    error: "/login", // redirect to login on auth error
   },
 
   // ✅ 6. Secret for signing JWT tokens
-  secret: process.env.NEXT_AUTH_SECRET
+  secret: process.env.NEXT_AUTH_SECRET,
 };
 export default authOptions;

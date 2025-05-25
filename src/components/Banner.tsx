@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import img from "@/assets/images/banner1.png";
+import img from "@/assets/images/bannerBG.jpg";
 
 const Banner = () => {
   return (
@@ -15,7 +15,7 @@ const Banner = () => {
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-white/70 dark:bg-black/60 z-10"></div>
+      <div className="absolute inset-0 bg-gray-100/60 dark:bg-black/60 z-10"></div>
 
       {/* Text Content */}
       <div className="z-20 text-center px-4 max-w-3xl text-gray-900 dark:text-white">

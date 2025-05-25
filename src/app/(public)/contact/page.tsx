@@ -24,7 +24,7 @@ export default function ContactPage() {
   };
 
   return (
-    <section className="w-full px-4 py-12 md:px-16 bg-light dark:bg-dark">
+    <section className="w-full bg  px-4 py-12 md:px-16 bg-light dark:bg-dark">
       <div className="max-w  grid md:grid-cols-2 gap-12">
         {/* Left: Contact Info */}
         <div>
@@ -35,7 +35,7 @@ export default function ContactPage() {
             Have questions, suggestions, or want to collaborate? Feel free to
             reach out!
           </p>
-          <ul className="text-gray-700 dark:text-gray-300 space-y-3">
+          <ul className="text-gray-700 dark:text-gray-300 space-y-3 p">
             <li>
               <strong>Email:</strong> devdiary@gmail.com
             </li>
